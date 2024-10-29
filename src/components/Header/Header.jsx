@@ -14,23 +14,24 @@ const Header = ({ categories, cartData }) => {
   const handleSignUp = () => {
     signInWithPopup(auth, provider)
       .then((res) => {
-        setIsSignUp(true)
+        setIsSignUp(true);
         // console.log(res.user)
-        setUser(res.user)})
+        setUser(res.user);
+      })
       .catch((err) => {
         alert(err);
       });
   };
   const handleSignOut = () => {
-    const confirm = window.confirm('are u sure ??')
+    const confirm = window.confirm("are u sure ??");
     if (confirm) {
       signOut(auth)
-      .then(() => {
-        setIsSignUp(false)
-      })
-      .catch((err) => {
-        alert(err);
-      });
+        .then(() => {
+          setIsSignUp(false);
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   };
   return (
@@ -80,7 +81,7 @@ const Header = ({ categories, cartData }) => {
             </li>
           </ul>
         </div>
-        <img className="h-32" src={logo} alt="" />
+        <img className="h-32 hidden lg:flex" src={logo} alt="" />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -95,33 +96,38 @@ const Header = ({ categories, cartData }) => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end gap-5 text-4xl">
-        {
-        isSignUp 
-        ? 
-        <>
-        <h1>{user.displayName}</h1>
-        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img
-            alt="Tailwind CSS Navbar component"
-            src={user.photoURL} />
-        </div>
-      </div>
-      <button className="btn" onClick={handleSignOut}>Sign Out</button>
-
-        </>
-        : 
-        <button className="btn" onClick={handleSignUp}>Sign Up</button>
-        }
+      <div className="navbar-end gap-1 lg:gap-5 text-sm lg:text-4xl">
+        {isSignUp ? (
+          <>
+            <h1 className="text-sm">{user.displayName}</h1>
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
+              </div>
+            </div>
+            <button className="btn px-2 lg:px-4 " onClick={handleSignOut}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <button className="btn px-2 lg:px-4" onClick={handleSignUp}>
+            Sign Up
+          </button>
+        )}
 
         <div className="border-2 px-2 py-1.5 relative">
           <Link to={`/cart`}>
-            {" "}
+            
             <MdOutlineShoppingCart />
           </Link>
           <div className="absolute -top-4 -right-4 border-2 bg-red-600 text-white px-3 rounded-lg">
-            <h1 className="text-xl font-semibold">{cartData?.length}</h1>
+            <h1 className="text-sm lg:text-xl font-semibold">
+              {cartData?.length}
+            </h1>
           </div>
         </div>
       </div>
