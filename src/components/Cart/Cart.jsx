@@ -11,12 +11,14 @@ const Cart = () => {
 const handleNavigate=()=>{
     navigate(-1)
 }
+const {handleRemoveFromCart} = useOutletContext()
   return (
     <div className="col-span-3">
       <div className="grid lg:grid-cols-2 gap-3">
       {cartAllData.length > 0 ? (
         cartAllData.map((cartData, index) => (
-          <CartDetail key={index} cartData={cartData}></CartDetail>
+          <CartDetail key={index} cartData={cartData}
+          handleRemoveFromCart={handleRemoveFromCart}></CartDetail>
         ))
       ) : (
         <h1>No Item Added yet</h1>

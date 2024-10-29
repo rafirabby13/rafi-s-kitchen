@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import SignUp from "../SignUp/SignUp.jsx";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../firebase/Firebase.config.jsx";
 import { useState } from "react";

@@ -22,14 +22,17 @@ const Home = () => {
     //   console.log(food);
     setCartData([...cartData, food])
   };
-
+const handleRemoveFromCart=(food)=>{
+  const remainingFoodData = cartData.filter(data=> data.idMeal !== food.idMeal)
+  setCartData(remainingFoodData)
+}
   return (
     <div>
       <Header categories={categories} cartData={cartData} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4">
         <Sidebar categories={categories} />
 
-        <Outlet context={{handleAddToCart, cartData}} />
+        <Outlet context={{handleAddToCart, handleRemoveFromCart, cartData}} />
       </div>
       <Footer />
     </div>
