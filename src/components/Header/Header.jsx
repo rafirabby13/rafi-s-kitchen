@@ -2,9 +2,38 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import SignUp from "../SignUp/SignUp.jsx";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../firebase/Firebase.config.jsx";
+import { useState } from "react";
 
 const Header = ({ categories, cartData }) => {
-    
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [user, setUser] = useState({});
+
+  const provider = new GoogleAuthProvider();
+  const handleSignUp = () => {
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        setIsSignUp(true)
+        // console.log(res.user)
+        setUser(res.user)})
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  const handleSignOut = () => {
+    const confirm = window.confirm('are u sure ??')
+    if (confirm) {
+      signOut(auth)
+      .then(() => {
+        setIsSignUp(false)
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    }
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -68,12 +97,33 @@ const Header = ({ categories, cartData }) => {
         </ul>
       </div>
       <div className="navbar-end gap-5 text-4xl">
-        <Link className="btn">Login</Link>
+        {
+        isSignUp 
+        ? 
+        <>
+        <h1>{user.displayName}</h1>
+        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS Navbar component"
+            src={user.photoURL} />
+        </div>
+      </div>
+      <button className="btn" onClick={handleSignOut}>Sign Out</button>
+
+        </>
+        : 
+        <button className="btn" onClick={handleSignUp}>Sign Up</button>
+        }
+
         <div className="border-2 px-2 py-1.5 relative">
-        <Link to={`/cart`}> <MdOutlineShoppingCart /></Link>
+          <Link to={`/cart`}>
+            {" "}
+            <MdOutlineShoppingCart />
+          </Link>
           <div className="absolute -top-4 -right-4 border-2 bg-red-600 text-white px-3 rounded-lg">
             <h1 className="text-xl font-semibold">{cartData?.length}</h1>
-            </div>
+          </div>
         </div>
       </div>
     </div>

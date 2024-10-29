@@ -21,8 +21,8 @@ const FoodDetail = () => {
                 :
                 strInstructions
             }</p>
-                <p>Youtube: <a target="_blank" href={strYoutube}>{strYoutube}</a></p>
-                <Link to={`/${strCategory}`} className="btn">Go Back...</Link>
+                <p>Youtube Link: <a target="_blank" href={strYoutube}>{strYoutube}</a></p>
+                <Link to={`/${strCategory}`} className="btn font-bold">Go Back...</Link>
             </div>
         </div>
     );
