@@ -4,7 +4,7 @@ const Meal = ({ meal }) => {
   const { strCategory , strCategoryThumb} = meal;
   return (
     <div className="">
-      <div className="card bg-base-100  shadow-xl flex flex-col space-y-4 p-4">
+      <div className="card bg-green-100  shadow-xl flex flex-col space-y-4 p-4">
         <figure className="rounded-lg">
           <img className="" src={strCategoryThumb} alt="Shoes" />
         </figure>
@@ -13,9 +13,9 @@ const Meal = ({ meal }) => {
             {strCategory}...
           </h2>
 
-          <div className="card-actions justify-start">
-            <button className="btn bg-violet-700 text-white ">Order Now</button>
-          </div>
+          {/* <div className="card-actions justify-start">
+            <button onClick={()=>handleAddToCart(meal)} className="btn bg-violet-700 text-white ">Add to Cart</button>
+          </div> */}
         </div>
       </div>
     </div>

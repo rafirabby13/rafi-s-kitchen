@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import logo from '../../assets/logo.jpg'
-const Header = ({ categories }) => {
+import logo from "../../assets/logo.jpg";
+import { MdOutlineShoppingCart } from "react-icons/md";
+
+const Header = ({ categories, cartData }) => {
+    
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -34,7 +37,9 @@ const Header = ({ categories }) => {
               <ul className="p-2">
                 {categories.map((category, index) => (
                   <li key={index}>
-                    <Link to={`/${category.strCategory}`}>{category.strCategory}</Link>
+                    <Link to={`/${category.strCategory}`}>
+                      {category.strCategory}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -62,8 +67,14 @@ const Header = ({ categories }) => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Login</a>
+      <div className="navbar-end gap-5 text-4xl">
+        <Link className="btn">Login</Link>
+        <div className="border-2 px-2 py-1.5 relative">
+        <Link to={`/cart`}> <MdOutlineShoppingCart /></Link>
+          <div className="absolute -top-4 -right-4 border-2 bg-red-600 text-white px-3 rounded-lg">
+            <h1 className="text-xl font-semibold">{cartData?.length}</h1>
+            </div>
+        </div>
       </div>
     </div>
   );

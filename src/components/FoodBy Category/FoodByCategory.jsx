@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 
-const FoodByCategory = ({ food }) => {
-  const { strMeal, strMealThumb } = food;
+import { Link } from "react-router-dom";
 
+const FoodByCategory = ({ food , handleAddToCart}) => {
+  const { strMeal, strMealThumb , idMeal} = food;
+//   console.log(food);
   return (
     <div>
       <div className="card bg-base-100  shadow-xl flex flex-col space-y-4 p-4">
@@ -14,8 +16,9 @@ const FoodByCategory = ({ food }) => {
             {strMeal.slice(0, 14)}...
           </h2>
 
-          <div className="card-actions justify-start ">
-            <button className="btn bg-orange-600 text-white">Order Now</button>
+          <div className="card-actions justify-between items-center ">
+            <Link to={`/food/${idMeal}`} className="underline text-xl font-semibold ">See Detail</Link>
+            <button  onClick={()=>handleAddToCart(food)} className="btn bg-orange-600 text-white">Add to Cart</button>
           </div>
         </div>
       </div>
